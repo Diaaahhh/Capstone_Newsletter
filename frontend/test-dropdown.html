@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Dropdown</title>
+    <style>
+      .user-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .user-btn {
+        background: #0d2747;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0d2747;
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease;
+        pointer-events: none;
+      }
+
+      .dropdown-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .dropdown-item {
+        display: block;
+        padding: 12px 16px;
+        color: white;
+        text-decoration: none;
+      }
+
+      .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="user-dropdown">
+      <button class="user-btn" id="userBtn">Profile</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#" class="dropdown-item">View Profile</a>
+        <a href="#" class="dropdown-item" id="logoutLink">Logout</a>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const userBtn = document.getElementById("userBtn");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const logoutLink = document.getElementById("logoutLink");
+
+        console.log("Elements found:", { userBtn, dropdownMenu, logoutLink });
+
+        // Toggle dropdown
+        if (userBtn && dropdownMenu) {
+          console.log("Attaching click event listener to user button");
+          userBtn.addEventListener("click", function (event) {
+            console.log("User button clicked");
+            event.preventDefault();
+            event.stopPropagation(); // Prevent event from bubbling to document
+            dropdownMenu.classList.toggle("active");
+            console.log(
+              "Dropdown menu active:",
+              dropdownMenu.classList.contains("active")
+            );
+          });
+        } else {
+          console.error("User button or dropdown menu not found");
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+          console.log("Document clicked");
+          if (dropdownMenu && dropdownMenu.classList.contains("active")) {
+            // Check if click is outside the user dropdown area
+            if (
+              userBtn &&
+              !userBtn.contains(event.target) &&
+              userBtn !== event.target &&
+              dropdownMenu &&
+              !dropdownMenu.contains(event.target)
+            ) {
+              console.log("Closing dropdown menu");
+              dropdownMenu.classList.remove("active");
+            }
+          }
+        });
+
+        // Handle logout
+        if (logoutLink) {
+          logoutLink.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Perform logout operations
+            console.log("Logout clicked");
+
+            // Close dropdown menu
+            if (dropdownMenu) {
+              dropdownMenu.classList.remove("active");
+            }
+
+            // Redirect to login page
+            console.log("Redirecting to login page");
+          });
+        }
+      });
+    </script>
+  <script src="profileDropdown.js"></script>
+</body>
+</html>

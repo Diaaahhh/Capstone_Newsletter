@@ -1,0 +1,269 @@
+/* Reset and base */
+:root {
+  --card-width: 520px;
+  --card-padding-y: 22px;
+  --card-padding-x: 28px;
+  --brand-logo-h: 96px;
+  --title-size: 35px;
+  --input-height: 30px;
+  --button-height: 34px;
+  --sso-height: 28px;
+  --gap: 8px;
+  --card-min-height: 520px;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body.login-page {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color: #eef3ff;
+  background: #0e2a4d url("Images/Background.jpeg") center/cover no-repeat fixed;
+}
+
+/* Dark blue overlay to match screenshot tone */
+body.login-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 26, 52, 0.78) 0%,
+    rgba(8, 26, 52, 0.72) 100%
+  );
+  pointer-events: none;
+}
+
+/* Full viewport centering handled by Bootstrap utilities, but keep spacing */
+.viewport {
+  position: relative;
+  padding: 32px 16px 72px;
+}
+
+/* Glass card */
+.login-card {
+  width: min(var(--card-width), 92vw);
+  min-height: var(--card-min-height);
+}
+.card {
+  border-radius: 14px;
+  padding: var(--card-padding-y) var(--card-padding-x) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(240, 246, 255, 0.14) 0%,
+    rgba(180, 210, 255, 0.08) 100%
+  );
+  box-shadow: 0 18px 50px rgba(4, 14, 33, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(14px) saturate(115%);
+  backdrop-filter: blur(14px) saturate(115%);
+}
+
+.brand-logo {
+  height: var(--brand-logo-h);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.title {
+  letter-spacing: 2px;
+  color: #eaf2ff;
+  font-size: var(--title-size);
+  margin: 6px 0 10px;
+}
+
+.form {
+  display: grid;
+  gap: var(--gap);
+}
+.form-label.small {
+  font-size: 12px;
+  color: #cfe0ff;
+  margin-top: 2px;
+}
+
+/* Force dark glass background on inputs and prevent white autofill */
+.glass-input.form-control {
+  background: rgba(10, 27, 55, 0.65) !important;
+  background-color: rgba(10, 27, 55, 0.65) !important;
+  color-scheme: dark;
+}
+.glass-input.form-control:focus {
+  background: rgba(18, 45, 85, 0.62) !important;
+  background-color: rgba(18, 45, 85, 0.62) !important;
+}
+/* Chrome/Safari autofill */
+.glass-input:-webkit-autofill,
+.glass-input:-webkit-autofill:hover,
+.glass-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f3f7ff;
+  caret-color: #f3f7ff;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(10, 27, 55, 0.65) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.glass-input::placeholder {
+  color: rgb(230, 240, 255);
+}
+.glass-input.form-control:focus {
+  border-color: #b2ccff;
+  background: rgba(18, 45, 85, 0.62);
+  box-shadow: 0 0 0 0.25rem rgba(86, 129, 243, 0.28);
+  color: #ffffff;
+}
+
+/* Password toggle button aligned with input height */
+.password-field .toggle {
+  border-color: rgba(255, 255, 255, 0.26) !important;
+  background: rgba(18, 45, 85, 0.5) !important;
+  color: #d5e3ff;
+  min-height: var(--input-height);
+  border-left: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.muted {
+  color: #c1d3ff;
+  font-size: 11px;
+}
+.forgot {
+  margin-top: 2px;
+}
+
+/* Buttons */
+.btn-primary {
+  --bs-btn-bg: #0d2747;
+  --bs-btn-border-color: rgba(255, 255, 255, 0.22);
+  --bs-btn-hover-bg: #0f2e59;
+  --bs-btn-hover-border-color: rgba(255, 255, 255, 0.3);
+  --bs-btn-active-bg: #0f2e59;
+  --bs-btn-color: #eef3ff;
+  height: var(--button-height);
+  padding: 0;
+}
+
+.btn-outline-light.social {
+  border-color: rgba(255, 255, 255, 0.26) !important;
+  background: rgba(13, 34, 66, 0.5);
+  color: #eaf2ff !important;
+  height: var(--sso-height);
+  padding: 0;
+}
+
+.divider {
+  color: #cfe0ff;
+}
+
+.link {
+  color: #dbe6ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Admin pill */
+.admin-pill {
+  bottom: 20px;
+  height: 22px;
+  min-width: 140px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.32) !important;
+  color: #0b2547 !important;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border: none;
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --card-width: 520px;
+    --brand-logo-h: 96px;
+    --input-height: 30px;
+    --button-height: 34px;
+  }
+}
+@media (max-width: 575.98px) {
+  :root {
+    --card-width: 92vw;
+    --brand-logo-h: 60px;
+    --input-height: 32px;
+  }
+}
+
+/* Stronger overrides to ensure dark inputs (handles input-group and theme resets) */
+.login-card .glass-input.form-control {
+  height: var(--input-height);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  background-color: rgba(10, 27, 55, 0.72) !important;
+  background: rgba(10, 27, 55, 0.72) !important;
+  background-image: none !important;
+  color: #f3f7ff !important;
+  padding: 0 10px;
+}
+.login-card .glass-input.form-control:focus {
+  background-color: rgba(18, 45, 85, 0.62) !important;
+  background: rgba(18, 45, 85, 0.62) !important;
+}
+/* Autofill fixes (Chromium and Firefox) */
+.login-card .glass-input:-webkit-autofill,
+.login-card .glass-input:-webkit-autofill:hover,
+.login-card .glass-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f3f7ff !important;
+  caret-color: #f3f7ff !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(10, 27, 55, 0.72) inset !important;
+}
+.login-card .glass-input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px rgba(10, 27, 55, 0.72) inset !important;
+  -moz-text-fill-color: #f3f7ff !important;
+}
+
+/* Error state styling */
+.glass-input.form-control.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+}
+
+/* Success state styling */
+.glass-input.form-control.is-valid {
+  border-color: #198754 !important;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+}
+
+/* Loading spinner for submit button */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  color: transparent !important;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-right-color: transparent;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

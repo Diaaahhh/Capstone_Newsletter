@@ -1,0 +1,17 @@
+@import url('CreateScholarships.css');
+
+.create-journal-page .page-title {
+  color: #0d2747;
+  font-weight: 600;
+}
+
+#addAuthorBtn {
+  margin-top: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+#addAuthorBtn:hover {
+  background-color: #0d2747;
+  color: #fff;
+}

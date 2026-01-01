@@ -1,0 +1,776 @@
+/* ============================================================
+   VC NEWSLETTER — SOFT LIGHT BLUE THEME (NOT PURE WHITE)
+   Designed by Linez for Dia ❤️
+   ============================================================ */
+
+/* Force window scrolling */
+html,
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  height: auto !important;
+  min-height: 100vh;
+}
+
+/* Remove height restrictions from containers */
+.main-container {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+/* Fixed filter buttons - stays in place when scrolling */
+.filter-container {
+  position: fixed !important;
+  top: 124px !important;
+  /* Below header (52px page title + 64px header + 8px spacing) */
+  left: -150px !important;
+  right: 0 !important;
+  width: auto !important;
+  z-index: 999 !important;
+  background: white !important;
+  padding: 16px 0px !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 15px !important;
+}
+
+/* Remove shadows from filter toggle button */
+.filter-container .filter-toggle {
+  box-shadow: none !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Remove shadows from generate PDF button */
+.filter-container .generate-pdf-btn {
+  box-shadow: none !important;
+}
+
+/* Remove hover shadow effects */
+.filter-container .filter-toggle:hover,
+.filter-container .generate-pdf-btn:hover {
+  box-shadow: none !important;
+}
+
+/* Remove hard-coded spacing; JS will position the dropdown exactly under the button */
+.filter-dropdown {
+  margin-top: 0 !important;
+  transition: all 0.3s ease !important;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Make filter dropdown fixed when active to prevent scrolling away */
+.filter-dropdown.active {
+  position: fixed !important;
+  /* `top` will be set dynamically via JS to match the bottom of the filter button */
+  top: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 998 !important;
+  /* Below filter container z-index 999 */
+  background: white !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  margin-top: 0 !important;
+  transform: translateY(50px);
+  /* Large space below the button */
+  transition: all 0.3s ease !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Adjust cards grid to account for fixed filter container */
+.cards-grid {
+  margin-top: 150px !important;
+}
+
+/* When filter dropdown is active, add extra margin to cards grid to account for fixed dropdown */
+.filter-dropdown.active~.cards-grid {
+  margin-top: 620px !important;
+  /* 80px + 40px adjustment + 500px max height */
+}
+
+/* When sidebar is open, adjust filter container position */
+.sidebar-checkbox:checked~.main-content .filter-container {
+  left: 280px !important;
+}
+
+/* ============================================================
+   USER DROPDOWN STYLES
+   ============================================================ */
+.user-dropdown {
+  position: relative;
+}
+
+.user-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.user-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: linear-gradient(135deg, #0d2747 0%, #0f2e59 100%);
+  border-radius: 8px;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10002;
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.dropdown-item i {
+  font-size: 16px;
+  width: 16px;
+  text-align: center;
+}
+
+/* PAGE BASE */
+.category-page .content-area {
+  position: relative;
+  padding: 40px 24px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  /* Soft blue-grey instead of white */
+  background: linear-gradient(135deg, #e9f0f7 0%, #eef3f8 100%);
+}
+
+/* WATERMARK */
+.category-page .watermark-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.07;
+}
+
+.category-page .watermark-logo-img {
+  width: 260px;
+  max-width: 65vw;
+  opacity: 0.7;
+}
+
+/* VC TIMELINE SECTION */
+.vc-timeline-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 28px 36px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #f7faff 0%, #f0f5fb 100%);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(40, 80, 135, 0.14);
+  box-shadow: 0 16px 40px rgba(40, 80, 135, 0.15);
+}
+
+/* WRAPPER */
+.vc-timeline-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 28px 28px 36px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #f7faff 0%, #f0f5fb 100%);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(40, 80, 135, 0.14);
+  box-shadow: 0 16px 40px rgba(40, 80, 135, 0.15);
+}
+
+/* TITLE */
+.vc-timeline-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+
+  background: linear-gradient(90deg, #1d4e89, #62a3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* STATE TEXT (loading / empty / error) */
+.vc-news-state {
+  font-size: 0.95rem;
+  color: #64748b;
+  text-align: center;
+  padding: 24px 0;
+}
+
+/* Main content - normal flow with overflow visible for sticky positioning */
+.main-content {
+  padding: 0;
+  overflow: visible !important;
+}
+
+/* Cards Grid - 2 columns filling the page */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+  padding: 40px 24px;
+  width: 100%;
+  align-items: start;
+}
+
+/* Mobile: 1 column */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    padding: 20px 12px;
+    gap: 20px;
+  }
+}
+
+/* =======================
+   NEWS CARDS
+======================= */
+.vc-news-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+
+  /* Soft card — not pure white */
+  background: linear-gradient(145deg, #ffffff 0%, #f7faff 100%);
+  border: 1px solid #d7e2ef;
+  box-shadow: 0 8px 20px rgba(40, 80, 135, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Hover Glow */
+.vc-news-card:hover {
+  transform: translateY(-6px);
+  border-color: #62a3ff;
+  box-shadow: 0 20px 36px rgba(100, 150, 230, 0.28);
+}
+
+/* =======================
+   MEDIA
+======================= */
+.vc-news-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  background: linear-gradient(135deg, #d7e6fa, #bcd4f5);
+}
+
+.vc-news-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Add spacing for content below image if needed, mostly handled by flex gap */
+
+/* =======================
+   CONTENT
+======================= */
+.vc-news-content {
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* META */
+.vc-news-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 35px;
+
+  font-size: 0.82rem;
+  color: #5c6b7a;
+}
+
+.vc-news-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Category Badge — push to right */
+.vc-news-category-badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #1d4e89, #2d6fb7);
+  color: #eef6ff;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(40, 80, 135, 0.3);
+
+  margin-left: auto;
+  /* 👉 Right-most in meta row */
+  white-space: nowrap;
+}
+
+/* TITLE */
+.vc-news-title {
+  font-size: 1.12rem;
+  font-weight: 650;
+  color: #0c1a2f;
+}
+
+/* BODY */
+.vc-news-body {
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.55;
+
+  max-height: 4.9em;
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.vc-news-card.vc-news-card--expanded .vc-news-body {
+  max-height: none;
+  -webkit-line-clamp: unset;
+}
+
+/* No "Click to expand" / "Click to collapse" text anymore */
+.vc-news-card::after {
+  content: "";
+}
+
+/* DOI */
+.vc-news-doi {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #1d4e89;
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vc-news-doi:hover {
+  text-decoration: underline;
+}
+
+/* =======================
+   ADMIN ACTIONS
+======================= */
+.vc-news-admin-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* EDIT BUTTON */
+.vc-news-admin-actions .btn-outline-primary {
+  color: #1d4e89;
+  border-color: #1d4e89;
+}
+
+.vc-news-admin-actions .btn-outline-primary:hover {
+  background: #1d4e89;
+  color: white;
+}
+
+/* DELETE BUTTON */
+.vc-news-admin-actions .btn-outline-danger {
+  color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.vc-news-admin-actions .btn-outline-danger:hover {
+  background: #b91c1c;
+  color: white;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media (max-width: 992px) {
+  .vc-timeline-wrapper {
+    padding: 22px 18px 26px;
+  }
+}
+
+@media (max-width: 992px) {
+  .vc-timeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-page .content-area {
+    padding: 22px 12px 40px;
+  }
+
+  .vc-timeline-wrapper {
+    padding: 18px 14px 20px;
+  }
+
+  .vc-timeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =======================
+   CATEGORY CHECKBOXES
+======================= */
+.category-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px 12px;
+  margin-top: 8px;
+  padding: 12px;
+  background: linear-gradient(145deg, #f8fbff 0%, #f0f5fb 100%);
+  border-radius: 8px;
+  border: 1px solid #d7e2ef;
+}
+
+.category-checkboxes .form-check {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.category-checkboxes .form-check-input {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-color: #62a3ff;
+}
+
+.category-checkboxes .form-check-input:checked {
+  background-color: #1d4e89;
+  border-color: #1d4e89;
+}
+
+.category-checkboxes .form-check-input:focus {
+  border-color: #62a3ff;
+  box-shadow: 0 0 0 0.2rem rgba(29, 78, 137, 0.25);
+}
+
+.category-checkboxes .form-check-label {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #334155;
+  user-select: none;
+}
+
+.category-checkboxes .form-check:hover .form-check-label {
+  color: #1d4e89;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .category-checkboxes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Full screen modal for VC newsletter */
+.news-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10000;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.news-modal.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.news-modal-content {
+  max-width: 800px;
+  margin: 80px auto 40px;
+  background: #ffffff;
+  padding: 48px 64px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.news-modal-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background: #e3f2fd;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  z-index: 10001;
+}
+
+.news-modal-close:hover {
+  background: #f5f5f5;
+  transform: scale(1.1);
+}
+
+.news-modal-header {
+  margin-bottom: 24px;
+  border-bottom: 2px solid #1d4e89;
+  padding-bottom: 16px;
+}
+
+.news-modal-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #1d4e89;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.news-modal-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.news-modal-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9375rem;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.news-modal-meta div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.news-modal-image {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.news-modal-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.news-modal-body {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #333333;
+  font-weight: 300;
+}
+
+.news-modal-body p {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .news-modal-content {
+    margin: 40px 16px;
+    padding: 32px 24px;
+  }
+
+  .news-modal-title {
+    font-size: 1.75rem;
+  }
+
+  .news-modal-body {
+    font-size: 1rem;
+  }
+}
+
+/* =======================
+   JOURNAL METRICS PILL
+   (Gil Huybrecht inspired premium design)
+======================= */
+.vc-metrics-pill {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: stretch;
+
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vc-news-card:hover .vc-metrics-pill {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* RANK SECTION */
+.vc-metrics-rank {
+  padding: 6px 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.vc-metrics-rank.q1 {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.vc-metrics-rank.q2 {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.vc-metrics-rank.q3 {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.vc-metrics-rank.q4 {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+
+.vc-metrics-rank.na {
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+}
+
+/* INFO SECTIONS (IF / Citations) */
+.vc-metrics-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  color: #334155;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.vc-metrics-info:last-child {
+  border-right: none;
+}
+
+.vc-metrics-info i {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.vc-metrics-label {
+  color: #a1adf1;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  margin-right: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.vc-metrics-value {
+  color: #ccf0fe;
+  font-feature-settings: "tnum";
+}
+
+/* Mobile tweak */
+@media (max-width: 480px) {
+  .vc-metrics-pill {
+    top: 8px;
+    left: 8px;
+    transform: scale(0.9);
+    transform-origin: top left;
+  }
+}

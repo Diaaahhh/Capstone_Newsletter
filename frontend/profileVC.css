@@ -1,0 +1,528 @@
+/* ============================================================
+   VC PROFILE — DISTINCTIVE BLUE THEME
+   Designed to match VC Newsletter aesthetic
+   ============================================================ */
+
+/* Profile Container */
+.vc-profile-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Main Profile Card - Horizontal Layout */
+.vc-profile-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f7faff 100%);
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(40, 80, 135, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(40, 80, 135, 0.14);
+}
+
+.vc-profile-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 0;
+    min-height: 700px;
+}
+
+/* Left Side - Profile Image & Info */
+.vc-profile-sidebar {
+    background: linear-gradient(180deg, #1d4e89 0%, #2d6fb7 100%);
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative Background Pattern */
+.vc-profile-sidebar::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Profile Image Container */
+.vc-profile-image-container {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px;
+}
+
+.vc-profile-image-wrapper {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease;
+    background: linear-gradient(135deg, #62a3ff 0%, #4a90e2 100%);
+}
+
+.vc-profile-image-wrapper:hover {
+    transform: scale(1.08) rotate(2deg);
+}
+
+.vc-profile-image-display {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 72px;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+.vc-profile-image-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Upload Section */
+.vc-upload-section {
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.vc-upload-zone {
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.vc-upload-zone:hover {
+    border-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.vc-upload-icon {
+    font-size: 42px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+}
+
+.vc-upload-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.vc-upload-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
+.vc-upload-input {
+    display: none;
+}
+
+.vc-upload-loading {
+    display: none;
+    margin-top: 15px;
+}
+
+.vc-upload-loading.active {
+    display: block;
+}
+
+.vc-loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: vcSpin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes vcSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Profile Stats */
+.vc-profile-stats {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+}
+
+.vc-stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.vc-stat-item:last-child {
+    border-bottom: none;
+}
+
+.vc-stat-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vc-stat-value {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Right Side - Profile Information */
+.vc-profile-main {
+    padding: 50px 60px;
+    background: linear-gradient(160deg, #f7faff 0%, #eef3f8 100%);
+}
+
+/* Header Section */
+.vc-profile-header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 3px solid #62a3ff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vc-profile-title {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #1d4e89, #62a3ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.vc-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #1d4e89, #2d6fb7);
+    color: white;
+    box-shadow: 0 6px 16px rgba(29, 78, 137, 0.4);
+}
+
+/* Form Section */
+.vc-profile-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.vc-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vc-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.vc-form-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4e89;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vc-form-label i {
+    font-size: 16px;
+}
+
+.vc-input-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.vc-form-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid #d7e2ef;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    background: white;
+    color: #0c1a2f;
+}
+
+.vc-form-input:focus {
+    outline: none;
+    border-color: #62a3ff;
+    box-shadow: 0 0 0 4px rgba(98, 163, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.vc-form-input:disabled {
+    background: #f0f5fb;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.vc-edit-btn {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #1d4e89 0%, #2d6fb7 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(29, 78, 137, 0.3);
+}
+
+.vc-edit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(29, 78, 137, 0.4);
+}
+
+.vc-edit-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Save Button */
+.vc-save-btn {
+    grid-column: 1 / -1;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+}
+
+.vc-save-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(76, 175, 80, 0.5);
+}
+
+.vc-save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.vc-save-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+/* Toast Notifications */
+.vc-toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.vc-toast {
+    min-width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 18px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: vcSlideIn 0.4s ease;
+    border-left: 5px solid;
+}
+
+@keyframes vcSlideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.vc-toast.success {
+    border-left-color: #4CAF50;
+}
+
+.vc-toast.error {
+    border-left-color: #f44336;
+}
+
+.vc-toast-icon {
+    font-size: 28px;
+}
+
+.vc-toast.success .vc-toast-icon {
+    color: #4CAF50;
+}
+
+.vc-toast.error .vc-toast-icon {
+    color: #f44336;
+}
+
+.vc-toast-content {
+    flex: 1;
+}
+
+.vc-toast-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #0c1a2f;
+}
+
+.vc-toast-message {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .vc-profile-layout {
+        grid-template-columns: 350px 1fr;
+    }
+
+    .vc-profile-main {
+        padding: 40px 40px;
+    }
+}
+
+@media (max-width: 968px) {
+    .vc-profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .vc-profile-sidebar {
+        border-right: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        padding: 40px 30px;
+    }
+
+    .vc-profile-image-wrapper {
+        width: 180px;
+        height: 180px;
+    }
+
+    .vc-profile-main {
+        padding: 40px 30px;
+    }
+
+    .vc-profile-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .vc-profile-container {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .vc-profile-card {
+        border-radius: 16px;
+    }
+
+    .vc-profile-sidebar {
+        padding: 30px 20px;
+    }
+
+    .vc-profile-image-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+
+    .vc-profile-image-display {
+        font-size: 56px;
+    }
+
+    .vc-profile-main {
+        padding: 30px 20px;
+    }
+
+    .vc-profile-title {
+        font-size: 24px;
+    }
+
+    .vc-profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .vc-input-wrapper {
+        flex-direction: column;
+    }
+
+    .vc-edit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .vc-toast-container {
+        left: 10px;
+        right: 10px;
+        top: 80px;
+    }
+
+    .vc-toast {
+        min-width: auto;
+    }
+}

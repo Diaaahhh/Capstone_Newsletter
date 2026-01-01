@@ -1,0 +1,190 @@
+/* Create Others Page Specific Styles */
+
+.form-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0d2747;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #0d2747;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #0d2747;
+  box-shadow: 0 0 0 3px rgba(13, 39, 71, 0.1);
+  outline: none;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.audience-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-check {
+  margin-bottom: 0;
+}
+
+.form-check-input:checked {
+  background-color: #0d2747;
+  border-color: #0d2747;
+}
+
+.form-text {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.draft-btn {
+  border: 2px solid #0d2747;
+  color: #0d2747;
+  background: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.draft-btn:hover {
+  background: #0d2747;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.create-btn {
+  background: linear-gradient(135deg, #0d2747 0%, #0f2e59 100%);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.create-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 39, 71, 0.3);
+}
+
+/* Back button styles */
+.back-btn {
+  position: fixed;
+  left: 17px;
+  top: 144px;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  border: none;
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn i {
+  font-size: 20px;
+}
+
+/* When sidebar is active, move the back button */
+.sidebar-checkbox:checked ~ .main-content .back-btn {
+  left: 360px;
+}
+
+/* Character count for summary */
+#summaryCharCount {
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .audience-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .draft-btn,
+  .create-btn {
+    width: 100%;
+  }
+
+  /* Responsive back button */
+  .back-btn {
+    left: 20px;
+    top: 144px;
+  }
+
+  /* When sidebar is active, move the back button */
+  .sidebar-checkbox:checked ~ .main-content .back-btn {
+    left: 120px;
+  }
+}

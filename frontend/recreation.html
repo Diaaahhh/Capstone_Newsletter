@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recreation - East West University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="homepage.css" />
+  <link rel="stylesheet" href="majorEvents.css" />
+  <link rel="stylesheet" href="underReview.css" />
+  <script src="alertModal.js"></script>
+  <link rel="stylesheet" href="confirmModal.css" />
+  <link rel="stylesheet" href="editModal.css" />
+</head>
+
+<body class="recreation-page">
+  <script>
+    // Check if user is logged in
+    if (!localStorage.getItem("isLoggedIn")) {
+      window.location.href = "loginPage.html";
+    }
+  </script>
+  <!-- Page Title Bar - Top of page -->
+  <div class="page-title-bar">
+    <div class="container-fluid">
+      <h1 class="page-title">Recreation</h1>
+    </div>
+  </div>
+  <!-- Top Header Bar -->
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="logo">
+            <a href="homepage.html"><img src="Images/logo.png" alt="East West University" class="header-logo" /></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="header-right">
+            <nav class="header-nav">
+              <a href="homepage.html" class="nav-link">Home</a>
+              <a href="#" class="nav-link notification-link">
+                Notification
+                <span class="notification-badge">2</span>
+              </a>
+              <a href="printPage.html" class="nav-link">Prints</a>
+              <a href="vcNewsletter.html" class="nav-link">VC Newsletter</a>
+              <div class="user-dropdown">
+                <button type="button" class="user-btn" id="userBtn">
+                  <i class="bi bi-person-circle"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                  <a href="profile.html" class="dropdown-item">
+                    <i class="bi bi-person"></i> View Profile
+                  </a>
+                  <a href="loginPage.html" class="dropdown-item" id="logoutLink">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                  </a>
+                </div>
+              </div>
+            </nav>
+            <div class="search-container">
+              <i class="bi bi-search search-icon"></i>
+              <input type="text" class="search-input" id="searchInput" placeholder="Search..." autocomplete="off" />
+              <div class="search-dropdown" id="searchDropdown">
+                <!-- Search results will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- Main Content Area -->
+  <div class="main-container">
+    <!-- Hidden checkbox for pure CSS sidebar toggle -->
+    <input type="checkbox" id="sidebar-toggle-checkbox" class="sidebar-checkbox" />
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>Categories</h3>
+        <label for="sidebar-toggle-checkbox" class="close-sidebar" id="closeSidebar">
+          <i class="bi bi-x-lg"></i>
+        </label>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="majorEvents.html" class="sidebar-link">Major Events</a>
+        <a href="cccEvents.html" class="sidebar-link">CCC Events</a>
+        <a href="alumniStories.html" class="sidebar-link">Alumni Stories</a>
+        <a href="clubActivities.html" class="sidebar-link">Club Activities</a>
+        <a href="scholarships.html" class="sidebar-link">Scholarships</a>
+        <a href="library.html" class="sidebar-link">Library</a>
+        <a href="research.html" class="sidebar-link">Research</a>
+        <a href="recreation.html" class="sidebar-link active">Recreation</a>
+        <a href="degreeReview.html" class="sidebar-link">Degree Review</a>
+        <a href="seminars.html" class="sidebar-link">Seminars</a>
+        <a href="memberships.html" class="sidebar-link">Memberships</a>
+        <a href="trainingProgram.html" class="sidebar-link">Training Program</a>
+        <a href="achievements.html" class="sidebar-link">Achievements</a>
+        <a href="map.html" class="sidebar-link">Map</a>
+        <a href="deptActivities.html" class="sidebar-link">Dept. Activities</a>
+        <a href="others.html" class="sidebar-link">Others</a>
+      </nav>
+    </aside>
+
+    <!-- Sidebar Toggle Button -->
+    <label for="sidebar-toggle-checkbox" class="sidebar-toggle" id="sidebarToggle">
+      <i class="bi bi-list"></i>
+    </label>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Action Buttons and Filter Row -->
+      <div class="action-filter-row" id="actionFilterRow">
+        <div class="action-buttons" id="actionButtons">
+          <a href="createrecreation.html?new=true" class="btn btn-primary create-btn">
+            <i class="bi bi-plus-circle"></i>
+            Create new
+          </a>
+          <a href="drafts.html" class="btn btn-outline-primary draft-btn">
+            <i class="bi bi-file-earmark-text"></i>
+            Draft
+          </a>
+        </div>
+
+        <div class="filter-container">
+          <button class="btn btn-outline-secondary filter-toggle" id="filterToggle">
+            <i class="bi bi-funnel"></i>
+            Filter & Sort
+            <i class="bi bi-chevron-down filter-arrow"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Dropdown -->
+      <div class="filter-dropdown" id="filterDropdown">
+        <div class="filter-section">
+          <div class="filter-row">
+            <div class="filter-group">
+              <label class="filter-label">Event Type:</label>
+              <select class="form-select filter-select">
+                <option value="">All Types</option>
+                <option value="seminar">Seminar</option>
+                <option value="workshop">Workshop</option>
+                <option value="training">Training</option>
+                <option value="career-fair">Career Fair</option>
+                <option value="presentation">Presentation</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Status:</label>
+              <select class="form-select filter-select">
+                <option value="">All Status</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Sort by:</label>
+              <select class="form-select filter-select">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="name-asc">A-Z</option>
+                <option value="name-desc">Z-A</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn btn-primary apply-filters">
+              <i class="bi bi-funnel"></i> Apply Filters
+            </button>
+            <button class="btn btn-outline-secondary clear-filters">
+              <i class="bi bi-x-circle"></i> Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Under Review Section -->
+        <div class="under-review-section">
+          <h2>Content Under Review</h2>
+          <div id="recreationUnderReview" class="under-review-container">
+            <!-- Under review content will be loaded here -->
+          </div>
+        </div>
+        <div class="watermark-container">
+          <div class="watermark">
+            <div class="watermark-logo">
+              <img src="Images/logo-short.png" alt="East West University" class="watermark-logo-img" />
+            </div>
+          </div>
+          <script src="pendingSubmissions.js"></script>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              if (typeof initPendingSubmissions === "function") {
+                initPendingSubmissions("recreationUnderReview", {
+                  category: "recreation",
+                  createPage: "createrecreation.html",
+                  getTitle: (formData) => formData.title || "Recreation",
+                  getSubtitle: (formData, submission) =>
+                    `Submitted by ${submission.createdBy || "Unknown"}`,
+                  getDetails: (formData) => [
+                    {
+                      label: "Full Article",
+                      value: formData.fullArticle
+                        ? formData.fullArticle.substring(0, 100) + "..."
+                        : "N/A"
+                    },
+                  ],
+                });
+              }
+            });
+          </script>
+        </div>
+      </div>
+
+      <!-- Published Recreation Section -->
+      <div class="published-events-section">
+        <h2>Published Recreation</h2>
+        <div id="publishedRecreation" class="published-events-grid">
+          <!-- Cards will be injected by JavaScript -->
+        </div>
+        <div id="publishedRecreationState" class="published-events-state"></div>
+      </div>
+  </div>
+  </main>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="imageUploadHelper.js"></script>
+  <script src="globalSearch.js"></script>
+  <script src="profileDropdown.js"></script>
+  <script src="majorEvents.js"></script>
+  <script src="notification.js"></script>
+  <script src="submission.js"></script>
+
+  <!-- Published Recreation Script -->
+  <script>
+    // ============================================================
+    // PUBLISHED RECREATION SECTION
+    // ============================================================
+    (function () {
+      const API_GENERAL_NEWS = "http://localhost:5000/api/newsfeed-general";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initPublishedRecreation();
+      });
+
+      async function initPublishedRecreation() {
+        const grid = document.getElementById("publishedRecreation");
+        const stateEl = document.getElementById("publishedRecreationState");
+        if (!grid || !stateEl) return;
+
+        stateEl.textContent = "Loading published recreation items...";
+
+        try {
+          const res = await fetch(API_GENERAL_NEWS);
+          if (!res.ok) throw new Error("Failed to load newsfeed");
+
+          let items = await res.json();
+          if (!Array.isArray(items)) items = [];
+
+          // Filter for recreation only
+          items = items.filter((item) => {
+            const cat = (item.category || "").toLowerCase();
+            return cat === "recreation";
+          });
+
+          if (!items.length) {
+            grid.innerHTML = "";
+            stateEl.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px;">
+                  <i class="bi bi-tree" style="font-size: 48px; color: #6c757d; margin-bottom: 20px;"></i>
+                  <h3 style="color: #0d2747; margin-bottom: 15px;">No Published Recreation Items Yet</h3>
+                  <p style="color: #6c757d; margin-bottom: 20px;">
+                    Recreation information submitted through the "Create new" button goes through an approval process.
+                    Once approved by an administrator, they will appear here.
+                  </p>
+                  <a href="createrecreation.html?new=true" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New Recreation Item
+                  </a>
+                </div>
+              `;
+            return;
+          }
+
+          // Sort newest first
+          items.sort((a, b) => {
+            const tA = new Date(a.createdAt || 0).getTime();
+            const tB = new Date(b.createdAt || 0).getTime();
+            return tB - tA;
+          });
+
+          grid.innerHTML = "";
+          stateEl.textContent = "";
+
+          items.forEach((item) => {
+            const card = buildRecreationCard(item);
+            grid.appendChild(card);
+          });
+        } catch (err) {
+          console.error("Published recreation load error:", err);
+          stateEl.textContent = "Error loading published recreation items.";
+        }
+      }
+
+      function buildRecreationCard(item) {
+        const card = document.createElement("article");
+        card.className = "published-event-card";
+
+        // Optional image
+        if (item.image) {
+          const media = document.createElement("div");
+          media.className = "published-event-media";
+
+          const img = document.createElement("img");
+          img.src = getImageUrl(item.image);
+          img.alt = "Recreation image";
+          img.loading = "lazy";
+
+          media.appendChild(img);
+          card.appendChild(media);
+        }
+
+        const content = document.createElement("div");
+        content.className = "published-event-content";
+
+        // Category badge
+        const catBadge = document.createElement("span");
+        catBadge.className = "published-event-category-badge";
+        catBadge.textContent = "Recreation";
+        content.appendChild(catBadge);
+
+        // Meta info
+        const metaInfo = document.createElement("div");
+        metaInfo.className = "published-event-meta-info";
+
+        const createdAt = item.createdAt
+          ? new Date(item.createdAt).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+          : "Unknown date";
+
+        const dateEl = document.createElement("div");
+        dateEl.innerHTML = `<i class="bi bi-calendar3"></i>${createdAt}`;
+
+        const authorEl = document.createElement("div");
+        authorEl.innerHTML = `<i class="bi bi-person-circle"></i>${item.createdBy || "Unknown"}`;
+
+        metaInfo.appendChild(dateEl);
+        metaInfo.appendChild(authorEl);
+        content.appendChild(metaInfo);
+
+        // Title
+        const fullText = item.fullText || "";
+        const firstLine = (fullText.split(/\r?\n/)[0] || "").trim();
+        const titleText = firstLine || "Recreation Item";
+
+        const titleEl = document.createElement("h3");
+        titleEl.className = "published-event-title";
+        titleEl.textContent = titleText;
+        content.appendChild(titleEl);
+
+        // Body preview
+        const bodyEl = document.createElement("div");
+        bodyEl.className = "published-event-body";
+        const lines = fullText.split(/\r?\n/);
+        const bodyLines = lines.slice(1).filter(line => line.trim());
+        const bodyText = bodyLines.join('\n').substring(0, 150);
+        bodyEl.textContent = bodyText + (bodyText.length < bodyLines.join('\n').length ? "..." : "");
+        content.appendChild(bodyEl);
+
+        // See more link
+        const seeMore = document.createElement("a");
+        seeMore.className = "published-event-see-more";
+        seeMore.href = "#";
+        seeMore.innerHTML = 'See more';
+        content.appendChild(seeMore);
+
+        card.appendChild(content);
+
+        // Click handler
+        seeMore.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openRecreationModal(item);
+        });
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          openRecreationModal(item);
+        });
+
+        return card;
+      }
+
+      function openRecreationModal(item) {
+        // Similar to homepage modal
+        const existingModal = document.querySelector(".event-modal");
+        if (existingModal) existingModal.remove();
+
+        const modal = document.createElement("div");
+        modal.className = "event-modal";
+
+        const closeBtn = document.createElement("button");
+        closeBtn.className = "event-modal-close";
+        closeBtn.innerHTML = '<i class="bi bi-x-lg"></i>';
+
+        const modalContent = document.createElement("div");
+        modalContent.className = "event-modal-content";
+
+        // Header
+        const header = document.createElement("div");
+        header.className = "event-modal-header";
+
+        const categoryBadge = document.createElement("div");
+        categoryBadge.className = "event-modal-category";
+        categoryBadge.textContent = "Recreation";
+        header.appendChild(categoryBadge);
+
+        const fullText = item.fullText || "";
+        const firstLine = (fullText.split(/\r?\n/)[0] || "").trim();
+        const titleText = firstLine || "Recreation Item";
+
+        const title = document.createElement("h1");
+        title.className = "event-modal-title";
+        title.textContent = titleText;
+        header.appendChild(title);
+
+        const meta = document.createElement("div");
+        meta.className = "event-modal-meta";
+
+        const createdAt = item.createdAt
+          ? new Date(item.createdAt).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+          : "Unknown date";
+
+        const dateDiv = document.createElement("div");
+        dateDiv.innerHTML = `<i class="bi bi-calendar3"></i>${createdAt}`;
+        meta.appendChild(dateDiv);
+
+        const authorDiv = document.createElement("div");
+        authorDiv.innerHTML = `<i class="bi bi-person-circle"></i>${item.createdBy || "Unknown"}`;
+        meta.appendChild(authorDiv);
+
+        header.appendChild(meta);
+        modalContent.appendChild(header);
+
+        // Image
+        if (item.image) {
+          const imageDiv = document.createElement("div");
+          imageDiv.className = "event-modal-image";
+          const img = document.createElement("img");
+          img.src = getImageUrl(item.image);
+          img.alt = titleText;
+          imageDiv.appendChild(img);
+          modalContent.appendChild(imageDiv);
+        }
+
+        // Body
+        const body = document.createElement("div");
+        body.className = "event-modal-body";
+
+        const paragraphs = fullText.split(/\n\n+/);
+        paragraphs.forEach(para => {
+          if (para.trim()) {
+            const p = document.createElement("p");
+            p.textContent = para.trim();
+            body.appendChild(p);
+          }
+        });
+
+        modalContent.appendChild(body);
+        modal.appendChild(closeBtn);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        setTimeout(() => modal.classList.add("active"), 10);
+
+        const closeModal = () => {
+          modal.classList.remove("active");
+          setTimeout(() => modal.remove(), 300);
+        };
+
+        closeBtn.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+
+        const handleEscape = (e) => {
+          if (e.key === "Escape") {
+            closeModal();
+            document.removeEventListener("keydown", handleEscape);
+          }
+        };
+        document.addEventListener("keydown", handleEscape);
+      }
+
+    })();
+  </script>
+</body>
+
+</html>

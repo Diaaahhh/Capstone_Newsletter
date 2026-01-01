@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VC Newsletter - East West University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="categoryPages.css" />
+  <link rel="stylesheet" href="majorEvents.css" />
+  <!-- 🔹 New VC newsletter-specific styles -->
+  <link rel="stylesheet" href="vcNewsletter.css" />
+  <link rel="stylesheet" href="confirmModal.css" />
+  <link rel="stylesheet" href="editModal.css" />
+  <!-- Recommended section styles (from homepage.css) -->
+  <link rel="stylesheet" href="homepage.css" />
+  <style>
+    /* Increase page title bar height */
+    .page-title-bar {
+      padding: 20px 0 !important;
+    }
+
+    /* Ensure filter dropdown doesn't overlap recommendations */
+    .filter-dropdown {
+      z-index: 100 !important;
+      position: relative !important;
+    }
+
+    /* Increase filter container width */
+    .filter-container {
+      flex: 1 !important;
+    }
+  </style>
+</head>
+
+<body class="category-page">
+  <!-- Page Title Bar - Top of page -->
+  <div class="page-title-bar">
+    <div class="container-fluid">
+      <h1 class="page-title">VC newsletter</h1>
+    </div>
+  </div>
+  <!-- Top Header Bar -->
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="logo">
+            <a href="homepage.html"><img src="Images/logo.png" alt="East West University" class="header-logo" /></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="header-right">
+            <nav class="header-nav">
+              <a href="homepage.html" class="nav-link">Home</a>
+              <a href="#" class="nav-link notification-link">
+                Notification
+              </a>
+              <a href="statistics.html" class="nav-link">Statistics</a>
+              <a href="printPage.html" class="nav-link">Prints</a>
+              <a href="vcNewsletter.html" class="nav-link">VC Newsletter</a>
+            </nav>
+            <div class="user-dropdown">
+              <button type="button" class="user-btn" id="userBtn">
+                <i class="bi bi-person-circle"></i>
+              </button>
+              <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profile.html" class="dropdown-item">
+                  <i class="bi bi-person"></i> View Profile
+                </a>
+                <a href="loginPage.html" class="dropdown-item" id="logoutLink">
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+              </div>
+            </div>
+            <div class="search-container">
+              <i class="bi bi-search search-icon"></i>
+              <input type="text" class="search-input" id="searchInput" placeholder="Search..." autocomplete="off" />
+              <div class="search-dropdown" id="searchDropdown">
+                <!-- Search results will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <div class="main-container">
+    <!-- Hidden checkbox for pure CSS sidebar toggle -->
+    <input type="checkbox" id="sidebar-toggle-checkbox" class="sidebar-checkbox" />
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>Categories</h3>
+        <label for="sidebar-toggle-checkbox" class="close-sidebar" id="closeSidebar">
+          <i class="bi bi-x-lg"></i>
+        </label>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="researchGrant.html" class="sidebar-link">Research Grant</a>
+        <a href="journalPublications.html" class="sidebar-link">Journal Publications</a>
+        <a href="bookChapters.html" class="sidebar-link">Book Chapters</a>
+        <a href="booksAndEditedBooks.html" class="sidebar-link">Books and Edited Books</a>
+        <a href="conferenceProceeding.html" class="sidebar-link">Conference Proceeding</a>
+        <a href="conferencePresentation.html" class="sidebar-link">Conference Presentation</a>
+        <a href="seminarAndWorkshop.html" class="sidebar-link">Seminar and Workshop</a>
+        <a href="mediaVC.html" class="sidebar-link">Media</a>
+        <a href="achievementsVC.html" class="sidebar-link">Achievements</a>
+      </nav>
+    </aside>
+    <!-- Sidebar Toggle Button -->
+    <label for="sidebar-toggle-checkbox" class="sidebar-toggle" id="sidebarToggle">
+      <i class="bi bi-list"></i>
+    </label>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Action Buttons and Filter Row -->
+      <div class="action-filter-row" id="actionFilterRow">
+        <div class="action-buttons" id="actionButtons">
+          <a href="CreateVCNewsletter.html" class="btn btn-primary create-btn">
+            <i class="bi bi-plus-circle"></i>
+            Create new
+          </a>
+          <a href="drafts.html" class="btn btn-outline-primary draft-btn">
+            <i class="bi bi-file-earmark-text"></i>
+            Draft
+          </a>
+        </div>
+
+        <div class="filter-container">
+          <button class="btn btn-outline-secondary filter-toggle" id="filterToggle">
+            <i class="bi bi-funnel"></i>
+            Filter & Sort
+            <i class="bi bi-chevron-down filter-arrow"></i>
+          </button>
+          <button class="btn btn-primary generate-pdf-btn">
+            <i class="bi bi-file-earmark-pdf"></i>
+            Generate PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- New Diverse Filter Section -->
+      <div class="filter-dropdown" id="filterDropdown">
+        <div class="filter-section">
+          <!-- General Filters -->
+          <div class="filter-category">
+            <h3 class="filter-category-title">General Filters</h3>
+
+            <!-- Date Range Filter -->
+            <div class="filter-row">
+              <div class="filter-group">
+                <label class="filter-label">Date Range:</label>
+                <div class="date-range">
+                  <input type="date" class="form-control date-input" placeholder="From" />
+                  <span class="date-separator">to</span>
+                  <input type="date" class="form-control date-input" placeholder="To" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="filter-row">
+              <div class="filter-group">
+                <label class="filter-label">Category:</label>
+                <div class="category-checkboxes">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="research-grant"
+                      id="cat-research-grant" />
+                    <label class="form-check-label" for="cat-research-grant">
+                      Research Grant
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="journal-publications"
+                      id="cat-journal-publications" />
+                    <label class="form-check-label" for="cat-journal-publications">
+                      Journal Publications
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="book-chapters"
+                      id="cat-book-chapters" />
+                    <label class="form-check-label" for="cat-book-chapters">
+                      Book Chapters
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="books-and-edited-books"
+                      id="cat-books-edited" />
+                    <label class="form-check-label" for="cat-books-edited">
+                      Books and Edited Books
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="conference-proceeding"
+                      id="cat-conf-proceeding" />
+                    <label class="form-check-label" for="cat-conf-proceeding">
+                      Conference Proceeding
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="conference-presentation"
+                      id="cat-conf-presentation" />
+                    <label class="form-check-label" for="cat-conf-presentation">
+                      Conference Presentation
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="seminar-and-workshop"
+                      id="cat-seminar-workshop" />
+                    <label class="form-check-label" for="cat-seminar-workshop">
+                      Seminar and Workshop
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="media" id="cat-media" />
+                    <label class="form-check-label" for="cat-media">
+                      Media
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category" value="achievements"
+                      id="cat-achievements" />
+                    <label class="form-check-label" for="cat-achievements">
+                      Achievements
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output & Layout Controls -->
+          <div class="filter-category">
+            <h3 class="filter-category-title">Output & Layout Controls</h3>
+
+            <!-- Sort By Filter -->
+            <div class="filter-row">
+              <div class="filter-group">
+                <label class="filter-label">Sort By:</label>
+                <select class="form-select filter-select">
+                  <option value="">Select Sort Option</option>
+                  <option value="date-desc">Date (Newest First)</option>
+                  <option value="date-asc">Date (Oldest First)</option>
+                  <option value="department">Department</option>
+                  <option value="impact">Impact</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Actions -->
+          <div class="filter-actions">
+            <button class="btn btn-primary apply-filters">
+              <i class="bi bi-funnel"></i>
+              Apply Filters
+            </button>
+            <button class="btn btn-outline-secondary clear-filters">
+              <i class="bi bi-x-circle"></i>
+              Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article Cards Grid -->
+      <div id="cardsGrid" class="cards-grid">
+        <!-- Cards will be injected here by JavaScript -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="imageUploadHelper.js"></script>
+  <script src="journalMetricsDisplay.js"></script>
+  <script src="profileDropdown.js?v=1"></script>
+  <script src="categoryPages.js?v=1"></script>
+  <script src="notification.js?v=1"></script>
+  <script src="submission.js?v=1"></script>
+  <script src="toast.js?v=1"></script>
+  <script src="confirmModal.js?v=1"></script>
+  <script src="editModal.js?v=1"></script>
+  <script src="globalSearch.js"></script>
+  <script src="vcNewsletterTimeline.js?v=5"></script>
+  <script src="newsletterEditorEnhancements.js?v=1"></script>
+  <script src="test-script.js?v=1"></script>
+  <script src="vcNewsletterModernEditor.js?v=6"></script>
+  <script>
+    console.log("🟢 INLINE SCRIPT EXECUTED");
+    console.log("Checking if initEditor exists:", typeof initEditor);
+  </script>
+  <!-- jsPDF and Fabric.js for Modern Canva-like editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+
+</html>

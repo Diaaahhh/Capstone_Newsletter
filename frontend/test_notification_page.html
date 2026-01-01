@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Notification Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Notification Link Test</h1>
+        <p>Click the notification bell to test the functionality</p>
+
+        <div class="alert alert-info">
+            <h5>How to use this debug page:</h5>
+            <ol>
+                <li>Create test notifications using the buttons below</li>
+                <li>Click the "Notification" link to open the dropdown</li>
+                <li>Check browser console for debug information</li>
+                <li>Use "Debug Notifications" button for manual API check</li>
+                <li>Look for "View Article" links in blue with borders (debug styling)</li>
+            </ol>
+            <p><strong>Debug features:</strong> Console logs show notification data, link rendering status, and any errors.</p>
+        </div>
+        
+        <!-- Simulate a notification link like in the main pages -->
+        <div class="mt-4">
+            <a href="#" class="nav-link notification-link">
+                Notification
+                <span class="notification-badge">0</span>
+            </a>
+        </div>
+        
+        <!-- Test button to create notifications -->
+        <div class="mt-4">
+            <button class="btn btn-primary" onclick="createTestNotifications()">
+                Create Test Notifications
+            </button>
+            <button class="btn btn-secondary" onclick="clearTestNotifications()">
+                Clear All Notifications
+            </button>
+            <button class="btn btn-info" onclick="debugNotifications()">
+                Debug Notifications
+            </button>
+        </div>
+        
+        <!-- Status display -->
+        <div class="mt-4">
+            <h5>Status:</h5>
+            <div id="status" class="alert alert-info">Ready to test...</div>
+        </div>
+    </div>
+
+    <script>
+        // Set a test user email for testing
+        localStorage.setItem('userEmail', 'test@example.com');
+        localStorage.setItem('userRole', 'user');
+        
+        function updateStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.className = `alert alert-${type}`;
+            statusEl.textContent = message;
+        }
+        
+        async function createTestNotifications() {
+            updateStatus('Creating test notifications...', 'info');
+            
+            try {
+                // First get some articles to link to
+                const articlesRes = await fetch('http://localhost:5000/api/newsfeed-general');
+                const articles = await articlesRes.json();
+                
+                if (!articles || articles.length === 0) {
+                    updateStatus('No articles found in database. Creating a simple test notification.', 'warning');
+                    // Create a simple notification without article link
+                    await createSimpleNotification();
+                    return;
+                }
+                
+                // Use the first article for testing
+                const testArticle = articles[0];
+                updateStatus(`Found ${articles.length} articles. Creating notification for: ${testArticle._id}`, 'success');
+                
+                // Create notification with article link
+                const notificationData = {
+                    to: 'test@example.com',
+                    title: 'Test: New Article Published',
+                    message: `Check out this article: ${testArticle._id}`,
+                    relatedArticleId: testArticle._id,
+                    relatedArticleCategory: testArticle.category || 'research'
+                };
+                
+                const response = await fetch('http://localhost:5000/api/notifications', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(notificationData)
+                });
+                
+                if (response.ok) {
+                    updateStatus('Test notification created successfully! Click the notification bell to see it.', 'success');
+                    // Reload notifications to show badge count
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    const error = await response.text();
+                    updateStatus(`Failed to create test notification: ${error}`, 'danger');
+                }
+                
+            } catch (error) {
+                console.error('Error creating test notification:', error);
+                updateStatus(`Error: ${error.message}`, 'danger');
+            }
+        }
+        
+        async function createSimpleNotification() {
+            try {
+                const notificationData = {
+                    to: 'test@example.com',
+                    title: 'Simple Test Notification',
+                    message: 'This is a test notification without article link'
+                };
+                
+                const response = await fetch('http://localhost:5000/api/notifications', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(notificationData)
+                });
+                
+                if (response.ok) {
+                    updateStatus('Simple test notification created! Click the notification bell to see it.', 'success');
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    const error = await response.text();
+                    updateStatus(`Failed to create simple notification: ${error}`, 'danger');
+                }
+                
+            } catch (error) {
+                console.error('Error creating simple notification:', error);
+                updateStatus(`Error: ${error.message}`, 'danger');
+            }
+        }
+        
+        async function clearTestNotifications() {
+            updateStatus('Clearing test notifications...', 'info');
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/notifications?to=test@example.com');
+                const notifications = await response.json();
+                
+                for (const notif of notifications) {
+                    await fetch(`http://localhost:5000/api/notifications/${notif._id}`, {
+                        method: 'DELETE'
+                    });
+                }
+                
+                updateStatus('All test notifications cleared!', 'success');
+                setTimeout(() => location.reload(), 1000);
+                
+            } catch (error) {
+                console.error('Error clearing notifications:', error);
+                updateStatus(`Error clearing notifications: ${error.message}`, 'danger');
+            }
+        }
+    </script>
+    
+    <!-- Load the notification script -->
+    <script src="notification.js"></script>
+
+    <!-- Load the debug script -->
+    <script src="debug_notification_links.js"></script>
+</body>
+</html>

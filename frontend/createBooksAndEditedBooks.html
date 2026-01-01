@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Books and Edited Books - East West University</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="categoryPages.css" />
+    <link rel="stylesheet" href="createBooksAndEditedBooks.css" />
+    <link rel="stylesheet" href="majorEvents.css">
+    <script src="alertModal.js"></script>
+    <link rel="stylesheet" href="homepage.css" />
+</head>
+
+  <body class="create-books-page">
+    <script>
+      if (!localStorage.getItem("isLoggedIn")) {
+        window.location.href = "loginPage.html";
+      }
+    </script>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="logo">
+              <a href="homepage.html"><img
+                src="Images/logo.png"
+                alt="East West University"
+                class="header-logo"/></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="header-right">
+              <nav class="header-nav">
+                <a href="homepage.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link notification-link">
+                  Notification
+                  <span class="notification-badge">2</span>
+                </a>
+                <a href="printPage.html" class="nav-link">Prints</a>
+                <a href="vcNewsletter.html" class="nav-link">VC Newsletter</a>
+                <div class="user-dropdown">
+                  <button type="button" class="user-btn" id="userBtn">
+                <i class="bi bi-person-circle"></i>
+              </button>
+                  <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="profile.html" class="dropdown-item">
+                      <i class="bi bi-person"></i> View Profile
+                    </a>
+                    <a
+                      href="loginPage.html"
+                      class="dropdown-item"
+                      id="logoutLink"
+                    >
+                      <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                  </div>
+                </div>
+              </nav>
+              <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-title-bar">
+      <div class="container-fluid">
+        <h1 class="page-title">Create Books and Edited Books</h1>
+      </div>
+    </div>
+
+  <!-- Main Content Area -->
+    <div class="main-container">
+
+
+      <!-- Back Button -->
+      <button
+        type="button"
+        class="btn btn-secondary back-btn"
+        onclick="window.location.href='booksAndEditedBooks.html'"
+      >
+        <i class="bi bi-arrow-left-circle"></i>
+      </button>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="form-container">
+          <form id="createBooksForm" novalidate>
+            <div class="form-section">
+              <h2 class="section-title">Books and Edited Books Information</h2>
+
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label class="form-label">Author(s) Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="authors"
+                    placeholder="e.g., Alam, F."
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">Year of Publication *</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="year"
+                    placeholder="e.g., 2022"
+                    required
+                  />
+                </div>
+                <div class="col-md-8 mb-3">
+                  <label class="form-label">Title of the Book *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="bookTitle"
+                    placeholder="e.g., Trauma, Memory and Identity Crisis: Reimagining and Rewriting the Past"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Publication Location</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="publicationPlace"
+                    placeholder="e.g., Dhaka or Newcastle"
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Publisher’s Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="publisher"
+                    placeholder="e.g., The University Press Limited or Cambridge Scholars Publishing"
+                    required
+                  />
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">ISBN</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="isbn"
+                    placeholder="e.g., 978-0-123456-78-9 or 0123456789"
+                  />
+                  <small class="text-muted">Enter ISBN and click Auto-Fill to populate form automatically</small>
+                  <div class="mt-2 text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      id="autoFillBtn"
+                      title="Auto-fill form using ISBN"
+                    >
+                      <i class="bi bi-arrow-repeat"></i> Auto-Fill
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Criteria *</label>
+                  <select class="form-select" id="criteria" required>
+                    <option value="">Select Criteria</option>
+                    <option value="Book">Book</option>
+                    <option value="Edited Book">Edited Book</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <!-- Auto-Fill Status Indicators -->
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Loading indicator -->
+                  <div id="autoFillLoading" class="alert alert-info" style="display: none;">
+                    <i class="bi bi-hourglass-split"></i> <strong>Fetching book data...</strong> Please wait.
+                  </div>
+
+                  <!-- Success message -->
+                  <div id="autoFillSuccess" class="alert alert-success" style="display: none;">
+                    <i class="bi bi-check-circle-fill"></i> <strong>Success!</strong> <span id="successMessage"></span>
+                  </div>
+
+                  <!-- Error message -->
+                  <div id="autoFillError" class="alert alert-danger" style="display: none;">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <strong>Error:</strong> <span id="errorMessage"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Harvard Reference Section -->
+            <div class="form-section">
+              <h2 class="section-title">Harvard Reference (Auto-generated, Editable)</h2>
+              <div
+                class="form-control"
+                id="harvardRef"
+                contenteditable="true"
+                style="min-height: 100px; height: auto;"
+              ></div>
+              <small class="text-muted">You can manually edit this reference if needed. Book title is italicized.</small>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline-primary draft-btn">
+                <i class="bi bi-file-earmark-text"></i> Save as Draft
+              </button>
+              <button type="submit" class="btn btn-primary create-btn">
+                <i class="bi bi-check-circle"></i> Submit for Review
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="submissionViewHelper.js"></script>
+    <script src="toast.js"></script>
+    <script src="createBooksAndEditedBooks.js"></script>
+    <script src="majorEvents.js"></script>
+    <script src="notification.js"></script>
+<script src="submission.js"></script>
+  <script src="profileDropdown.js"></script>
+</body>
+</html>

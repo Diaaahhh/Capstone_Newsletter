@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VC Profile - East West University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="homepage.css" />
+    <link rel="stylesheet" href="profileVC.css" />
+    <script src="alertModal.js"></script>
+  </head>
+  <body class="homepage">
+    <script>
+      // Check if user is logged in
+      if (!localStorage.getItem("isLoggedIn")) {
+        window.location.href = "loginPage.html";
+      }
+    </script>
+
+    <!-- Page Title Bar - Top of page -->
+    <div class="page-title-bar">
+      <div class="container-fluid">
+        <h1 class="page-title">VC Profile</h1>
+      </div>
+    </div>
+
+    <!-- Top Header Bar -->
+    <header class="header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="logo">
+              <a href="homepage.html">
+                <img
+                  src="Images/logo.png"
+                  alt="East West University"
+                  class="header-logo"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="header-right">
+              <nav class="header-nav">
+                <a href="homepage.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link notification-link">
+                  Notification
+                  <span class="notification-badge">2</span>
+                </a>
+                <a href="printPage.html" class="nav-link">Prints</a>
+                <a href="vcNewsletter.html" class="nav-link">VC Newsletter</a>
+                <a href="profileVC.html" class="nav-link">Profile</a>
+              </nav>
+              <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+      <!-- Hidden checkbox for pure CSS sidebar toggle -->
+      <input
+        type="checkbox"
+        id="sidebar-toggle-checkbox"
+        class="sidebar-checkbox"
+      />
+
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h3>Categories</h3>
+          <label
+            for="sidebar-toggle-checkbox"
+            class="close-sidebar"
+            id="closeSidebar"
+          >
+            <i class="bi bi-x-lg"></i>
+          </label>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="researchGrant.html" class="sidebar-link">Research Grant</a>
+          <a href="journalPublications.html" class="sidebar-link">Journal Publications</a>
+          <a href="bookChapters.html" class="sidebar-link">Book Chapters</a>
+          <a href="booksAndEditedBooks.html" class="sidebar-link">Books and Edited Books</a>
+          <a href="conferenceProceeding.html" class="sidebar-link">Conference Proceeding</a>
+          <a href="conferencePresentation.html" class="sidebar-link">Conference Presentation</a>
+          <a href="seminarAndWorkshop.html" class="sidebar-link">Seminar and Workshop</a>
+          <a href="mediaVC.html" class="sidebar-link">Media</a>
+          <a href="achievementsVC.html" class="sidebar-link">Achievements</a>
+        </nav>
+      </aside>
+
+      <!-- Sidebar Toggle Button -->
+      <label
+        for="sidebar-toggle-checkbox"
+        class="sidebar-toggle"
+        id="sidebarToggle"
+      >
+        <i class="bi bi-list"></i>
+      </label>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="vc-profile-container">
+          <div class="vc-profile-card">
+            <div class="vc-profile-layout">
+              <!-- Left Side - Profile Image & Stats -->
+              <div class="vc-profile-sidebar">
+                <div class="vc-profile-image-container">
+                  <div class="vc-profile-image-wrapper">
+                    <div class="vc-profile-image-display" id="vcProfileImageDisplay">
+                      <span id="vcProfileInitial">VC</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vc-upload-section">
+                  <div class="vc-upload-zone" id="vcUploadZone">
+                    <div class="vc-upload-icon">
+                      <i class="bi bi-cloud-arrow-up"></i>
+                    </div>
+                    <div class="vc-upload-text">Upload Profile Photo</div>
+                    <div class="vc-upload-hint">JPG or PNG • Max 5MB</div>
+                    <input
+                      type="file"
+                      id="vcImageUpload"
+                      class="vc-upload-input"
+                      accept="image/jpeg,image/png"
+                    />
+                  </div>
+                  <div class="vc-upload-loading" id="vcUploadLoading">
+                    <div class="vc-loading-spinner"></div>
+                  </div>
+                </div>
+
+                <div class="vc-profile-stats">
+                  <div class="vc-stat-item">
+                    <span class="vc-stat-label">Role</span>
+                    <span class="vc-stat-value">Vice Chancellor</span>
+                  </div>
+                  <div class="vc-stat-item">
+                    <span class="vc-stat-label">Status</span>
+                    <span class="vc-stat-value">Active</span>
+                  </div>
+                  <div class="vc-stat-item">
+                    <span class="vc-stat-label">Access Level</span>
+                    <span class="vc-stat-value">Administrator</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Side - Profile Information -->
+              <div class="vc-profile-main">
+                <div class="vc-profile-header">
+                  <h2 class="vc-profile-title">Vice Chancellor Profile</h2>
+                  <span class="vc-role-badge">
+                    <i class="bi bi-shield-check"></i>
+                    VC
+                  </span>
+                </div>
+
+                <!-- VC Profile Form -->
+                <form class="vc-profile-form">
+                  <div class="vc-form-group">
+                    <label class="vc-form-label">
+                      <i class="bi bi-person-fill"></i>
+                      Full Name
+                    </label>
+                    <div class="vc-input-wrapper">
+                      <input
+                        type="text"
+                        class="vc-form-input"
+                        id="vcName"
+                        placeholder="Enter full name"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="vc-edit-btn"
+                        data-target="vcName"
+                      >
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="vc-form-group">
+                    <label class="vc-form-label">
+                      <i class="bi bi-envelope-fill"></i>
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      class="vc-form-input"
+                      id="vcEmail"
+                      placeholder="email@ewubd.edu"
+                      disabled
+                    />
+                  </div>
+
+                  <div class="vc-form-group">
+                    <label class="vc-form-label">
+                      <i class="bi bi-briefcase-fill"></i>
+                      Designation
+                    </label>
+                    <div class="vc-input-wrapper">
+                      <input
+                        type="text"
+                        class="vc-form-input"
+                        id="vcDesignation"
+                        placeholder="e.g., Vice Chancellor"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="vc-edit-btn"
+                        data-target="vcDesignation"
+                      >
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="vc-form-group">
+                    <label class="vc-form-label">
+                      <i class="bi bi-building"></i>
+                      Department
+                    </label>
+                    <div class="vc-input-wrapper">
+                      <input
+                        type="text"
+                        class="vc-form-input"
+                        id="vcDept"
+                        placeholder="e.g., Administration"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="vc-edit-btn"
+                        data-target="vcDept"
+                      >
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="vc-form-group">
+                    <label class="vc-form-label">
+                      <i class="bi bi-telephone-fill"></i>
+                      Office Phone
+                    </label>
+                    <div class="vc-input-wrapper">
+                      <input
+                        type="text"
+                        class="vc-form-input"
+                        id="vcPhone"
+                        placeholder="e.g., +880-2-9882308"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="vc-edit-btn"
+                        data-target="vcPhone"
+                      >
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="vc-form-group">
+                    <label class="vc-form-label">
+                      <i class="bi bi-geo-alt-fill"></i>
+                      Office Location
+                    </label>
+                    <div class="vc-input-wrapper">
+                      <input
+                        type="text"
+                        class="vc-form-input"
+                        id="vcOffice"
+                        placeholder="e.g., Main Building, 5th Floor"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="vc-edit-btn"
+                        data-target="vcOffice"
+                      >
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <button type="button" class="vc-save-btn" id="vcSaveBtn" disabled>
+                    <i class="bi bi-check-circle-fill"></i> Save All Changes
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="vc-toast-container" id="vcToastContainer"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="homepage.js"></script>
+    <script src="./notification.js"></script>
+    <script>
+      // VC Profile functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const userEmail = localStorage.getItem("userEmail");
+
+        // Set initial values
+        if (userEmail) {
+          document.getElementById("vcEmail").value = userEmail;
+        }
+
+        // Load saved profile data from localStorage
+        const savedProfile = JSON.parse(localStorage.getItem("vcProfile") || "{}");
+        if (savedProfile.name) document.getElementById("vcName").value = savedProfile.name;
+        if (savedProfile.designation) document.getElementById("vcDesignation").value = savedProfile.designation;
+        if (savedProfile.department) document.getElementById("vcDept").value = savedProfile.department;
+        if (savedProfile.phone) document.getElementById("vcPhone").value = savedProfile.phone;
+        if (savedProfile.office) document.getElementById("vcOffice").value = savedProfile.office;
+        if (savedProfile.profileImage) {
+          document.getElementById("vcProfileImageDisplay").innerHTML = `<img src="${savedProfile.profileImage}" alt="VC Profile">`;
+        }
+
+        // Set profile initial
+        const name = savedProfile.name || "VC";
+        document.getElementById("vcProfileInitial").textContent = name.charAt(0).toUpperCase();
+
+        // Edit button functionality
+        const editButtons = document.querySelectorAll(".vc-edit-btn");
+        const saveBtn = document.getElementById("vcSaveBtn");
+
+        editButtons.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const targetId = this.getAttribute("data-target");
+            const input = document.getElementById(targetId);
+            input.disabled = !input.disabled;
+            
+            if (!input.disabled) {
+              input.focus();
+              saveBtn.disabled = false;
+            }
+          });
+        });
+
+        // Save button functionality
+        saveBtn.addEventListener("click", function () {
+          const profileData = {
+            name: document.getElementById("vcName").value,
+            designation: document.getElementById("vcDesignation").value,
+            department: document.getElementById("vcDept").value,
+            phone: document.getElementById("vcPhone").value,
+            office: document.getElementById("vcOffice").value,
+            profileImage: savedProfile.profileImage || ""
+          };
+
+          localStorage.setItem("vcProfile", JSON.stringify(profileData));
+
+          // Update initial
+          if (profileData.name) {
+            document.getElementById("vcProfileInitial").textContent = profileData.name.charAt(0).toUpperCase();
+          }
+
+          // Disable all inputs
+          document.querySelectorAll(".vc-form-input").forEach((input) => {
+            if (input.id !== "vcEmail") {
+              input.disabled = true;
+            }
+          });
+
+          saveBtn.disabled = true;
+
+          // Show success toast
+          showToast("Success", "Profile updated successfully!", "success");
+        });
+
+        // Image upload functionality
+        const uploadZone = document.getElementById("vcUploadZone");
+        const imageUpload = document.getElementById("vcImageUpload");
+        const uploadLoading = document.getElementById("vcUploadLoading");
+        const profileImageDisplay = document.getElementById("vcProfileImageDisplay");
+
+        uploadZone.addEventListener("click", () => imageUpload.click());
+
+        uploadZone.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          uploadZone.style.borderColor = "rgba(255, 255, 255, 0.8)";
+          uploadZone.style.background = "rgba(255, 255, 255, 0.2)";
+        });
+
+        uploadZone.addEventListener("dragleave", () => {
+          uploadZone.style.borderColor = "";
+          uploadZone.style.background = "";
+        });
+
+        uploadZone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          uploadZone.style.borderColor = "";
+          uploadZone.style.background = "";
+          const file = e.dataTransfer.files[0];
+          if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+            handleImageUpload(file);
+          }
+        });
+
+        imageUpload.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            handleImageUpload(file);
+          }
+        });
+
+        function handleImageUpload(file) {
+          uploadLoading.classList.add("active");
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            setTimeout(() => {
+              profileImageDisplay.innerHTML = `<img src="${e.target.result}" alt="VC Profile">`;
+              
+              // Save to localStorage
+              const currentProfile = JSON.parse(localStorage.getItem("vcProfile") || "{}");
+              currentProfile.profileImage = e.target.result;
+              localStorage.setItem("vcProfile", JSON.stringify(currentProfile));
+
+              uploadLoading.classList.remove("active");
+              showToast("Success", "Profile image updated successfully!", "success");
+            }, 1000);
+          };
+          reader.readAsDataURL(file);
+        }
+
+        // Toast notification function
+        function showToast(title, message, type) {
+          const toastContainer = document.getElementById("vcToastContainer");
+          const toast = document.createElement("div");
+          toast.className = `vc-toast ${type}`;
+          toast.innerHTML = `
+            <div class="vc-toast-icon">
+              <i class="bi bi-${type === "success" ? "check-circle-fill" : "exclamation-circle-fill"}"></i>
+            </div>
+            <div class="vc-toast-content">
+              <div class="vc-toast-title">${title}</div>
+              <div class="vc-toast-message">${message}</div>
+            </div>
+          `;
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toast.style.animation = "vcSlideOut 0.3s ease";
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }
+      });
+    </script>
+  </body>
+</html>

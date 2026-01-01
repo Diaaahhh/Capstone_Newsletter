@@ -1,0 +1,22 @@
+/* Research Grant Page Styles */
+@import url('CreateScholarships.css');
+
+.create-research-page .page-title {
+  color: #0d2747;
+  font-weight: 600;
+}
+
+.research-member {
+  background-color: #ffffff;
+}
+
+#addMemberBtn {
+  margin-top: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+#addMemberBtn:hover {
+  background-color: #0d2747;
+  color: #fff;
+}

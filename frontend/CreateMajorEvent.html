@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Major Event - East West University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="majorEvents.css" />
+    <link rel="stylesheet" href="CreateMajorEvent.css" />
+    <script src="alertModal.js"></script>
+    <link rel="stylesheet" href="homepage.css" />
+</head>
+  <body class="create-major-event-page">
+    <script>
+      // Check if user is logged in
+      if (!localStorage.getItem("isLoggedIn")) {
+        window.location.href = "loginPage.html";
+      }
+    </script>
+    <!-- Top Header Bar -->
+    <header class="header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="logo">
+              <a href="homepage.html"><img
+                src="Images/logo.png"
+                alt="East West University"
+                class="header-logo"/></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="header-right">
+              <nav class="header-nav">
+                <a href="homepage.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link notification-link">
+                  Notification
+                  <span class="notification-badge">2</span>
+                </a>
+                <a href="printPage.html" class="nav-link">Prints</a>
+                <a href="vcNewsletter.html" class="nav-link">VC Newsletter</a>
+                <div class="user-dropdown">
+                  <button type="button" class="user-btn" id="userBtn">
+                <i class="bi bi-person-circle"></i>
+              </button>
+                  <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="profile.html" class="dropdown-item">
+                      <i class="bi bi-person"></i> View Profile
+                    </a>
+                    <a
+                      href="loginPage.html"
+                      class="dropdown-item"
+                      id="logoutLink"
+                    >
+                      <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                  </div>
+                </div>
+              </nav>
+              <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Title Bar - Top of page -->
+    <div class="page-title-bar">
+      <div class="container-fluid">
+        <h1 class="page-title">Create Major Event</h1>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+      
+      <!-- Back Button -->
+      <button
+        type="button"
+        class="btn btn-secondary back-btn"
+        onclick="window.location.href='majorEvents.html'"
+      >
+        <i class="bi bi-arrow-left-circle"></i>
+      </button>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Form Container -->
+        <div class="form-container">
+          <form id="createEventForm" novalidate>
+            <!-- Section 1: Basic Event Information -->
+            <div class="form-section">
+              <h2 class="section-title">Create Major Event Article</h2>
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="eventTitle" class="form-label"
+                    >Event Title *</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="eventTitle"
+                    placeholder="Enter event title"
+                    required
+                  />
+                </div>
+              </div>
+
+
+
+            <!-- Section 2: Event Description -->
+            <div class="form-section">
+              <h2 class="section-title">Event Description</h2>
+              <div class="row">
+               
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="fullArticle" class="form-label"
+                    >Full Article *</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="fullArticle"
+                    rows="6"
+                    placeholder="Detailed description of the event"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Media and Audience -->
+            <div class="form-section">
+              <h2 class="section-title">Media</h2>
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="featuredImages" class="form-label"
+                    >Featured Images</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="featuredImages"
+                    multiple
+                    accept="image/*"
+                  />
+                  <div class="form-text">
+                    Upload one or more images for the event
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="videoLink" class="form-label">Video Link</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="videoLink"
+                    placeholder="https://example.com/video"
+                  />
+                  <div class="form-text">
+                    Enter a link to a video related to the event
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label class="form-label">Target Audience</label>
+                  <div class="audience-options">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="audience"
+                        id="students"
+                        value="students"
+                      />
+                      <label class="form-check-label" for="students"
+                        >Students</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="audience"
+                        id="faculty"
+                        value="faculty"
+                      />
+                      <label class="form-check-label" for="faculty"
+                        >Faculty</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="audience"
+                        id="staff"
+                        value="staff"
+                      />
+                      <label class="form-check-label" for="staff">Staff</label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="audience"
+                        id="alumni"
+                        value="alumni"
+                      />
+                      <label class="form-check-label" for="alumni"
+                        >Alumni</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="audience"
+                        id="public"
+                        value="public"
+                      />
+                      <label class="form-check-label" for="public"
+                        >General Public</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+
+            <!-- Section 4: Additional Information -->
+            <!-- <div class="form-section">
+              <h2 class="section-title">Additional Information</h2>
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="participation" class="form-label"
+                    >Audience/Participation</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="participation"
+                    placeholder="Number of participants, etc."
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="tags" class="form-label">Tags/Keywords</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tags"
+                    placeholder="Enter tags separated by commas"
+                  />
+                  <div class="form-text">
+                    Enter relevant keywords for the event
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline-primary draft-btn">
+                <i class="bi bi-file-earmark-text"></i>
+                Save as Draft
+              </button>
+              <button type="submit" class="btn btn-primary create-btn">
+                <i class="bi bi-check-circle"></i>
+                Submit for Review
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="imageUploadHelper.js"></script>
+    <script src="profileDropdown.js"></script>
+    <script src="underReview.js"></script>
+    <script src="toast.js"></script>
+    <script src="CreateMajorEvent.js"></script>
+    <script src="majorEvents.js"></script>
+    <script src="notification.js"></script>
+    <script src="submissionViewHelper.js"></script>
+<script src="submission.js"></script>
+  </body>
+</html>

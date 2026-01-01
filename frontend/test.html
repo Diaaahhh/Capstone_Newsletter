@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Test Register API</h3>
+  <button onclick="register()">Register</button>
+  <button onclick="login()">Login</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    async function register() {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: "STU001",
+  name: "Fariha Anjum Dia",
+  email: "student1@ewu.edu.bd",
+  password: "123456",
+  role: "student"
+        })
+      });
+      const data = await response.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function login() {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'student1@ewu.edu.bd',
+          password: '123456'
+        })
+      });
+      const data = await response.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

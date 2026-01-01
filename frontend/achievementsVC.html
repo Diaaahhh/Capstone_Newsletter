@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Achievements - East West University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="homepage.css" />
+  <link rel="stylesheet" href="underReview.css" />
+  <link rel="stylesheet" href="majorEvents.css" />
+  <script src="alertModal.js"></script>
+
+</head>
+
+<body class="achievements-vc-page">
+  <script>
+    // Check if user is logged in
+    if (!localStorage.getItem("isLoggedIn")) {
+      window.location.href = "loginPage.html";
+    }
+  </script>
+  <!-- Top Header Bar -->
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="logo">
+            <a href="homepage.html"><img src="Images/logo.png" alt="East West University" class="header-logo" /></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="header-right">
+            <nav class="header-nav">
+              <a href="homepage.html" class="nav-link">Home</a>
+              <a href="#" class="nav-link notification-link">
+                Notification
+                <span class="notification-badge">2</span>
+              </a>
+              <a href="printPage.html" class="nav-link">Prints</a>
+              <a href="vcNewsletter.html" class="nav-link">VC Newsletter</a>
+              <div class="user-dropdown">
+                <button type="button" class="user-btn" id="userBtn">
+                  <i class="bi bi-person-circle"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                  <a href="profileVC.html" class="dropdown-item">
+                    <i class="bi bi-person"></i> View Profile
+                  </a>
+                  <a href="loginPage.html" class="dropdown-item" id="logoutLink">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                  </a>
+                </div>
+              </div>
+            </nav>
+            <div class="search-container">
+              <i class="bi bi-search search-icon"></i>
+              <input type="text" class="search-input" id="searchInput" placeholder="Search..." autocomplete="off" />
+              <div class="search-dropdown" id="searchDropdown">
+                <!-- Search results will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Title Bar - Top of page -->
+  <div class="page-title-bar">
+    <div class="container-fluid">
+      <h1 class="page-title">Achievements</h1>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-container">
+    <!-- Hidden checkbox for pure CSS sidebar toggle -->
+    <input type="checkbox" id="sidebar-toggle-checkbox" class="sidebar-checkbox" />
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>Categories</h3>
+        <label for="sidebar-toggle-checkbox" class="close-sidebar" id="closeSidebar">
+          <i class="bi bi-x-lg"></i>
+        </label>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="researchGrant.html" class="sidebar-link">Research Grant</a>
+        <a href="journalPublications.html" class="sidebar-link">Journal Publications</a>
+        <a href="bookChapters.html" class="sidebar-link">Book Chapters</a>
+        <a href="booksAndEditedBooks.html" class="sidebar-link">Books and Edited Books</a>
+        <a href="conferenceProceeding.html" class="sidebar-link">Conference Proceeding</a>
+        <a href="conferencePresentation.html" class="sidebar-link">Conference Presentation</a>
+        <a href="seminarAndWorkshop.html" class="sidebar-link">Seminar and Workshop</a>
+        <a href="mediaVC.html" class="sidebar-link">Media</a>
+        <a href="achievementsVC.html" class="sidebar-link active">Achievements</a>
+      </nav>
+    </aside>
+    <!-- Sidebar Toggle Button -->
+    <label for="sidebar-toggle-checkbox" class="sidebar-toggle" id="sidebarToggle">
+      <i class="bi bi-list"></i>
+    </label>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Action Buttons and Filter Row -->
+      <div class="action-filter-row" id="actionFilterRow">
+        <div class="action-buttons" id="actionButtons">
+          <a href="createAchievementsVC.html" class="btn btn-primary create-btn">
+            <i class="bi bi-plus-circle"></i>
+            Create new
+          </a>
+          <a href="draftsVC.html" class="btn btn-outline-primary draft-btn">
+            <i class="bi bi-file-earmark-text"></i>
+            Draft
+          </a>
+        </div>
+
+        <div class="filter-container">
+          <button class="btn btn-outline-secondary filter-toggle" id="filterToggle">
+            <i class="bi bi-funnel"></i>
+            Filter & Sort
+            <i class="bi bi-chevron-down filter-arrow"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Dropdown -->
+      <div class="filter-dropdown" id="filterDropdown">
+        <div class="filter-section">
+          <div class="filter-row">
+            <div class="filter-group">
+              <label class="filter-label">Filter by Date:</label>
+              <select class="form-select filter-select">
+                <option value="">All Dates</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="custom">Custom Date Range</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Filter by Time:</label>
+              <select class="form-select filter-select">
+                <option value="">All Times</option>
+                <option value="morning">Morning (6 AM - 12 PM)</option>
+                <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+                <option value="evening">Evening (6 PM - 12 AM)</option>
+                <option value="night">Night (12 AM - 6 AM)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Sort by:</label>
+              <select class="form-select filter-select">
+                <option value="date-asc">Date Created (Oldest First)</option>
+                <option value="date-desc">Date Created (Newest First)</option>
+                <option value="name-asc">Event Name (A-Z)</option>
+                <option value="name-desc">Event Name (Z-A)</option>
+                <option value="start-date">Start Date</option>
+                <option value="end-date">End Date</option>
+                <option value="popularity">Popularity</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <div class="filter-group">
+              <label class="filter-label">Custom Date Range:</label>
+              <div class="date-range">
+                <input type="date" class="form-control date-input" placeholder="Start Date" />
+                <span class="date-separator">to</span>
+                <input type="date" class="form-control date-input" placeholder="End Date" />
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Event Type:</label>
+              <select class="form-select filter-select">
+                <option value="">All Types</option>
+                <option value="academic">Academic</option>
+                <option value="cultural">Cultural</option>
+                <option value="sports">Sports</option>
+                <option value="social">Social</option>
+                <option value="professional">Professional</option>
+                <option value="workshop">Workshop</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Status:</label>
+              <select class="form-select filter-select">
+                <option value="">All Status</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn btn-primary apply-filters">
+              <i class="bi bi-funnel"></i>
+              Apply Filters
+            </button>
+            <button class="btn btn-outline-secondary clear-filters">
+              <i class="bi bi-x-circle"></i>
+              Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Under Review Section -->
+        <div class="under-review-section">
+          <h2>Content Under Review</h2>
+          <div id="achievementsVCUnderReview" class="under-review-container">
+            <!-- Under review content will be loaded here -->
+          </div>
+        </div>
+        <div class="watermark-container">
+          <div class="watermark">
+            <div class="watermark-logo">
+              <img src="Images/logo-short.png" alt="East West University" class="watermark-logo-img" />
+            </div>
+          </div>
+          <script src="pendingSubmissions.js"></script>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              if (typeof initPendingSubmissions === "function") {
+                initPendingSubmissions("achievementsVCUnderReview", {
+                  category: "achievementsVC",
+                  createPage: "createAchievementsVC.html",
+                  getTitle: (formData) =>
+                    formData.optionType || "Achievement Submission",
+                  getSubtitle: (_, submission) =>
+                    `Submitted by ${submission.createdBy || "Unknown"}`,
+                  getDetails: (formData) => [
+                    {
+                      label: "Details",
+                      value: formData.achievementText,
+                    },
+                  ],
+                });
+              }
+            });
+          </script>
+        </div>
+      </div>
+
+      <!-- Published Achievements Section -->
+      <div class="published-events-section">
+        <h2>Published Achievements</h2>
+        <div id="publishedAchievementsVC" class="published-events-grid">
+          <!-- Cards will be injected by JavaScript -->
+        </div>
+        <div id="publishedAchievementsVCState" class="published-events-state"></div>
+      </div>
+  </div>
+  </main>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="imageUploadHelper.js"></script>
+  <script src="globalSearch.js"></script>
+  <script src="majorEvents.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="notification.js"></script>
+  <script src="submission.js"></script>
+  <script src="profileDropdown.js"></script>
+
+  <!-- Published Achievements Script -->
+  <script>
+    // ============================================================
+    // PUBLISHED ACHIEVEMENTS SECTION
+    // ============================================================
+    (function () {
+      const API_VC_NEWS = "http://localhost:5000/api/newsfeedvc";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initPublishedAchievementsVC();
+      });
+
+      async function initPublishedAchievementsVC() {
+        const grid = document.getElementById("publishedAchievementsVC");
+        const stateEl = document.getElementById("publishedAchievementsVCState");
+        if (!grid || !stateEl) return;
+
+        stateEl.textContent = "Loading published achievements...";
+
+        try {
+          const res = await fetch(API_VC_NEWS);
+          if (!res.ok) throw new Error("Failed to load newsfeed");
+
+          let items = await res.json();
+          if (!Array.isArray(items)) items = [];
+
+          // Filter for achievements only
+          items = items.filter((item) => {
+            const cat = (item.category || "").toLowerCase();
+            return cat === "achievements" || cat === "achievementsvc" || cat === "achievements-vc";
+          });
+
+          if (!items.length) {
+            grid.innerHTML = "";
+            stateEl.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px;">
+                  <i class="bi bi-trophy" style="font-size: 48px; color: #6c757d; margin-bottom: 20px;"></i>
+                  <h3 style="color: #0d2747; margin-bottom: 15px;">No Published Achievements Yet</h3>
+                  <p style="color: #6c757d;">
+                    Achievement submissions (student/faculty achievements, awards, etc.) submitted through the "Create new" button go through an approval process.
+                    Once approved by an administrator, they will appear here.
+                  </p>
+                </div>
+              `;
+            return;
+          }
+
+          // Sort newest first
+          items.sort((a, b) => {
+            const tA = new Date(a.createdAt || 0).getTime();
+            const tB = new Date(b.createdAt || 0).getTime();
+            return tB - tA;
+          });
+
+          grid.innerHTML = "";
+          stateEl.textContent = "";
+
+          items.forEach((item) => {
+            const card = buildAchievementsVCCard(item);
+            grid.appendChild(card);
+          });
+        } catch (err) {
+          console.error("Published achievements load error:", err);
+          stateEl.textContent = "Error loading published achievements.";
+        }
+      }
+
+      function buildAchievementsVCCard(item) {
+        const card = document.createElement("article");
+        card.className = "published-event-card";
+
+        // Optional image
+        if (item.image) {
+          const media = document.createElement("div");
+          media.className = "published-event-media";
+
+          const img = document.createElement("img");
+          img.src = getImageUrl(item.image);
+          img.alt = "Achievement image";
+          img.loading = "lazy";
+
+          media.appendChild(img);
+          card.appendChild(media);
+        }
+
+        const content = document.createElement("div");
+        content.className = "published-event-content";
+
+        // Category badge
+        const catBadge = document.createElement("span");
+        catBadge.className = "published-event-category-badge";
+        catBadge.textContent = "Achievement";
+        content.appendChild(catBadge);
+
+        // Meta info
+        const metaInfo = document.createElement("div");
+        metaInfo.className = "published-event-meta-info";
+
+        const createdAt = item.createdAt
+          ? new Date(item.createdAt).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+          : "Unknown date";
+
+        const dateEl = document.createElement("div");
+        dateEl.innerHTML = `<i class="bi bi-calendar3"></i>${createdAt}`;
+
+        const authorEl = document.createElement("div");
+        authorEl.innerHTML = `<i class="bi bi-person-circle"></i>${item.createdBy || "Unknown"}`;
+
+        metaInfo.appendChild(dateEl);
+        metaInfo.appendChild(authorEl);
+        content.appendChild(metaInfo);
+
+        // Title
+        const fullText = item.fullText || "";
+        const firstLine = (fullText.split(/\r?\n/)[0] || "").trim();
+        const titleText = firstLine || "Achievement";
+
+        const titleEl = document.createElement("h3");
+        titleEl.className = "published-event-title";
+        titleEl.textContent = titleText;
+        content.appendChild(titleEl);
+
+        // Body preview
+        const bodyEl = document.createElement("div");
+        bodyEl.className = "published-event-body";
+        const lines = fullText.split(/\r?\n/);
+        const bodyLines = lines.slice(1).filter(line => line.trim());
+        const bodyText = bodyLines.join('\n').substring(0, 150);
+        bodyEl.textContent = bodyText + (bodyText.length < bodyLines.join('\n').length ? "..." : "");
+        content.appendChild(bodyEl);
+
+        // See more link
+        const seeMore = document.createElement("a");
+        seeMore.className = "published-event-see-more";
+        seeMore.href = "#";
+        seeMore.innerHTML = 'See more';
+        content.appendChild(seeMore);
+
+        card.appendChild(content);
+
+        // Click handler
+        seeMore.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openAchievementsVCModal(item);
+        });
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          openAchievementsVCModal(item);
+        });
+
+        return card;
+      }
+
+      function openAchievementsVCModal(item) {
+        // Similar to homepage modal
+        const existingModal = document.querySelector(".event-modal");
+        if (existingModal) existingModal.remove();
+
+        const modal = document.createElement("div");
+        modal.className = "event-modal";
+
+        const closeBtn = document.createElement("button");
+        closeBtn.className = "event-modal-close";
+        closeBtn.innerHTML = '<i class="bi bi-x-lg"></i>';
+
+        const modalContent = document.createElement("div");
+        modalContent.className = "event-modal-content";
+
+        // Header
+        const header = document.createElement("div");
+        header.className = "event-modal-header";
+
+        const categoryBadge = document.createElement("div");
+        categoryBadge.className = "event-modal-category";
+        categoryBadge.textContent = "Achievement";
+        header.appendChild(categoryBadge);
+
+        const fullText = item.fullText || "";
+        const firstLine = (fullText.split(/\r?\n/)[0] || "").trim();
+        const titleText = firstLine || "Achievement";
+
+        const title = document.createElement("h1");
+        title.className = "event-modal-title";
+        title.textContent = titleText;
+        header.appendChild(title);
+
+        const meta = document.createElement("div");
+        meta.className = "event-modal-meta";
+
+        const createdAt = item.createdAt
+          ? new Date(item.createdAt).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+          : "Unknown date";
+
+        const dateDiv = document.createElement("div");
+        dateDiv.innerHTML = `<i class="bi bi-calendar3"></i>${createdAt}`;
+        meta.appendChild(dateDiv);
+
+        const authorDiv = document.createElement("div");
+        authorDiv.innerHTML = `<i class="bi bi-person-circle"></i>${item.createdBy || "Unknown"}`;
+        meta.appendChild(authorDiv);
+
+        header.appendChild(meta);
+        modalContent.appendChild(header);
+
+        // Image
+        if (item.image) {
+          const imageDiv = document.createElement("div");
+          imageDiv.className = "event-modal-image";
+          const img = document.createElement("img");
+          img.src = getImageUrl(item.image);
+          img.alt = titleText;
+          imageDiv.appendChild(img);
+          modalContent.appendChild(imageDiv);
+        }
+
+        // Body
+        const body = document.createElement("div");
+        body.className = "event-modal-body";
+
+        const paragraphs = fullText.split(/\n\n+/);
+        paragraphs.forEach(para => {
+          if (para.trim()) {
+            const p = document.createElement("p");
+            p.textContent = para.trim();
+            body.appendChild(p);
+          }
+        });
+
+        modalContent.appendChild(body);
+        modal.appendChild(closeBtn);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        setTimeout(() => modal.classList.add("active"), 10);
+
+        const closeModal = () => {
+          modal.classList.remove("active");
+          setTimeout(() => modal.remove(), 300);
+        };
+
+        closeBtn.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+
+        const handleEscape = (e) => {
+          if (e.key === "Escape") {
+            closeModal();
+            document.removeEventListener("keydown", handleEscape);
+          }
+        };
+        document.addEventListener("keydown", handleEscape);
+      }
+
+    })();
+  </script>
+
+</body>
+
+</html>
